@@ -15,7 +15,7 @@ services:
       - '--log.level=warn'
     volumes:
       - ./config/prometheus:/etc/prometheus
-      - ./certs:/etc/certs
+      - ./config/certs:/etc/certs
       - prometheus_data:/prometheus
     expose:
       - 9090
