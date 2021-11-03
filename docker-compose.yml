@@ -12,9 +12,10 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
-      - '--log.level=debug'
+      - '--log.level=warn'
     volumes:
       - ./config/prometheus:/etc/prometheus
+      - ./certs:/etc/certs
       - prometheus_data:/prometheus
     expose:
       - 9090
@@ -27,11 +28,11 @@ services:
   alertmanager:
     image: prom/alertmanager:v0.23.0
     container_name: alertmanager
-    volumes:
-      - ./alertmanager:/etc/alertmanager
     command:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
+    volumes:
+      - ./config/alertmanager:/etc/alertmanager
     restart: unless-stopped
     expose:
       - 9093
@@ -77,7 +78,7 @@ services:
       - "9093:9093"
       - "9091:9091"
     volumes:
-      - ./caddy:/etc/caddy
+      - ./config/caddy:/etc/caddy
     restart: unless-stopped
     networks:
       - monitor-net

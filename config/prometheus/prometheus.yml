@@ -17,8 +17,8 @@ scrape_configs:
     scheme: https
     metrics_path: /metrics
     tls_config:
-      cert_file: /etc/prometheus/certs/ssl_certificate.crt
-      key_file:  /etc/prometheus/certs/ssl_certificate_key.key
+      cert_file: /etc/certs/ssl_certificate.crt
+      key_file:  /etc/certs/ssl_certificate_key.key
     scrape_interval: 5s
     static_configs:
       - targets: ['htd-bizapps-monitor.cisco.com']
